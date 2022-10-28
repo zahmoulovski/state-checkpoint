@@ -1,14 +1,15 @@
-import React from 'react'
-import UserCard from './UserCard'
+import React from "react";
+import UserCard from "./UserCard";
 
-const UserList = ({users}) => {
+const UserList = ({ users }) => {
+  console.log(users);
   return (
-    <div className='css-cards'>
-      {
-        users.map((element)=>(<UserCard user={element}/>))
-      }
+    <div className="css-cards">
+      {users.map((element) => (
+        <UserCard user={element} />
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default UserList
+export default UserList;

@@ -1,49 +1,64 @@
-import React, { Component } from 'react'
-import {Card} from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Counter from './Counter';
+import React, { Component } from "react";
+import { Card } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Counter from "./Counter";
 
 export default class UserCard extends Component {
-  render({user}) {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false
+    };
+  }
+  togel = () => {
+    this.setState({ show: !this.state.show });
+  };
+  render() {
+    const test = this.props.user
+    console.log(test,'usercard')
+
     return (
-      <div className='cards'>
-      <Card>
-      <Card.Header className='cardHeader'> {user.name} </Card.Header>
-      <Card.Body>
-        <div style={{textAlign:"center"}}>
-            <Card.Title className='cardTitle'>{user.username}</Card.Title>
-            <Card.Title style={{color:"red"}}>ID : {user.id} </Card.Title>
-        </div>
-        <Card.Text>
-          Here's my email : <strong>"{user.email}"</strong>, my address is {user.address.street}, {user.address.suite} in {user.address.city} - {user.address.zipcode} and to be exact here's 
-          <ul>
-            <li>
-                Latitude {user.address.geo.lat}
-            </li>
-            <li>
-                Longitude {user.address.geo.lng}
-            </li>
-          </ul> 
-          <hr/>
-          <div>
-          
-            <button className="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                Show more
-            </button><br/>
-            <div  class="collapse" id="collapseExample">
-            <Counter/>
-              I'm an employer at {user.company.name}, that it has one of the cooloest catch phrases : <strong>"{user.company.catchPhrase}"</strong>, and our services are : 
+      <div className="cards">
+        <Card>
+          <Card.Header className="cardHeader">{this.props.name}</Card.Header>
+          <Card.Body>
+            <div style={{ textAlign: "center" }}>
+              <Card.Title className="cardTitle">
+                {this.props.user.username}
+              </Card.Title>
+              <Card.Title style={{ color: "red" }}>
+                {this.props.user.id}{" "}
+              </Card.Title>
+            </div>
+            <Card.Text>
+              Here's my email : <strong>"{this.props.user.email}"</strong>, my
+              address is {this.props.user.address.street},{" "}
+              {this.props.user.address.suite} in {this.props.user.address.city}{" "}
+              - {this.props.user.address.zipcode} and to be exact here's
               <ul>
-                <li>
-                  {user.company.bs}
-                </li>
+                <li>Latitude {this.props.user.address.geo.lat}</li>
+                <li>Longitude {this.props.user.address.geo.lng}</li>
               </ul>
-            </div>  
-          </div>
-        </Card.Text>
-      </Card.Body>
-    </Card>
-    </div>
-    )
+              <hr />
+              <button
+                className="btn btn-primary"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseExample"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+                onClick={() => this.togel()}
+              >
+                Show more
+              </button>
+              <div>
+                {this.state.show  && <Counter test ={test}  />}
+                
+              </div>
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </div>
+    );
   }
 }
